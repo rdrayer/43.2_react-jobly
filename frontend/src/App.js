@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import JoblyApi from "./api";
 import Home from "./Home";
-//import NavBar from "./NavBar";
+import NavBar from "./NavBar";
 //import CompaniesList from
 //import CompanyDetails from
 //import JobsList from
@@ -14,6 +14,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <NavBar />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
