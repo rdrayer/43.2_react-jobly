@@ -4,7 +4,7 @@ import './App.css';
 import JoblyApi from "./api";
 import Home from "./Home";
 import NavBar from "./NavBar";
-//import CompaniesList from
+import CompanyList from "./CompanyList"
 //import CompanyDetails from
 //import JobsList from
 //import Login from
@@ -18,25 +18,13 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/companies" element={<CompanyList />} />
             {/*
-            <Route path="/companies">
-              <CompaniesList />
-            </Route>
-            <Route path="/companies/:companyId">
-              <CompanyDetails />
-            </Route>
-            <Route path="/jobs">
-              <JobsList />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
+            <Route path="/companies/:companyId" element={<CompanyDetails />} />
+            <Route path="/jobs" element={<JobsList />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
             */}
             <Route element={<p>Hmm, I can't seem to find the page you're looking for.</p>} />
           </Routes>     

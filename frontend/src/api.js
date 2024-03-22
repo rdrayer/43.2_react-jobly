@@ -16,6 +16,8 @@ class JoblyApi {
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
+    //console.log(JoblyApi.token);
+    console.log(process.env.REACT_APP_BASE_URL);
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
@@ -44,6 +46,15 @@ class JoblyApi {
   }
 
   // obviously, you'll add a lot here ...
+  static async getCompanies(name) {
+    try {
+      let res = await this.request("companies", { name });
+      return res.companies;
+    } catch (error) {
+      console.error("Error getting companies:", error);
+    }
+
+  }
 }
 
 export default JoblyApi;
@@ -52,5 +63,4 @@ export default JoblyApi;
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
-
 
