@@ -4,9 +4,9 @@ import './App.css';
 import JoblyApi from "./api";
 import Home from "./Home";
 import NavBar from "./NavBar";
-import CompanyList from "./CompanyList"
-//import CompanyDetails from
-//import JobsList from
+import CompanyList from "./CompanyList";
+import CompanyDetail from "./CompanyDetail";
+import JobsList from "./JobsList";
 //import Login from
 //import Profile from
 
@@ -19,9 +19,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/companies" element={<CompanyList />} />
-            {/*
-            <Route path="/companies/:companyId" element={<CompanyDetails />} />
+            <Route path="/companies/:handle" element={<CompanyDetail />} />
             <Route path="/jobs" element={<JobsList />} />
+            {/*
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} />
