@@ -19,12 +19,9 @@ function CompanyList() {
         setCompanies(companies);
     }
 
-    //if (!companies) return (<p>help</p>);
-
     const handleSearch = async (evt) => {
         evt.preventDefault();
-        // todo
-        setSearchTerm(evt.target.value);
+        await search(searchTerm);
     };
 
     return (
@@ -45,7 +42,8 @@ function CompanyList() {
                             <CompanyCard 
                                 key={c.handle} 
                                 handle={c.handle}
-                                name={c.name} 
+                                name={c.name}
+                                description={c.description}
                             />
                         ))}
                     </div>
