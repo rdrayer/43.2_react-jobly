@@ -1,11 +1,14 @@
 // displays basic info about a job
 // it will be used within the job list component
+import { Link } from 'react-router-dom';
 
-function JobCard({ title, company_handle, salary }) {
+function JobCard({ id, title, companyHandle, salary }) {
     return (
         <div>
-            <h2>{title}</h2>
-            <p>{company_handle}</p>
+            <Link to={`/jobs/${id}`}>
+                <h2>{title}</h2>
+            </Link>
+            <p>{companyHandle}</p>
             <p>{salary}</p>
         </div>
     )

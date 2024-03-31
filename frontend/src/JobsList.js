@@ -39,7 +39,8 @@ function JobsList() {
                         {jobs.map(j => (
                             <JobCard 
                                 key={j.id} 
-                                company_handle={j.company_handle}
+                                id={j.id}
+                                companyHandle={j.companyHandle}
                                 title={j.title}
                                 salary={j.salary}
                             />

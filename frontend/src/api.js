@@ -56,10 +56,16 @@ class JoblyApi {
     }
   }
 
+  static async getJob(id) {
+    let res = await this.request(`jobs/${id}`);
+    console.log(res.job);
+    return res.job;
+  }
+
   static async getJobs(title) {
     try {
       let res = await this.request("jobs", { title });
-      console.log(res.jobs);
+      //console.log(res.jobs);
       return res.jobs;
     } catch (error) {
       console.error("Error getting jobs:", error);
