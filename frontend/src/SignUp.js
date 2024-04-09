@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp({ signup }) {
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+
+  let initialFormData = {
     username: '',
     password: '',
-    email: '', // Add other fields as necessary
-  });
+    email: '',
+    firstName: '',
+    lastName: ''
+  }
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +24,14 @@ function SignUp({ signup }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(formData); // Pass the formData to the signup function
+    try {
+      await signup(formData); // Pass the formData to the signup function
+      sessionStorage.setItem('welcomeMessage', `Welcome, ${formData.firstName}!`); // store welcome message
+      navigate('/'); // redirect to homepage
+    } catch (error) {
+      // todo
+    }
+    //setFormData(initialFormData); // reset form data, not sure if this is needed anymore since we're redirecting
   };
 
   return (
@@ -51,6 +65,28 @@ function SignUp({ signup }) {
           name="email"
           id="email"
           value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          value={formData.lastName}
           onChange={handleChange}
           required
         />

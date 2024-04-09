@@ -58,7 +58,7 @@ class JoblyApi {
 
   static async getJob(id) {
     let res = await this.request(`jobs/${id}`);
-    console.log(res.job);
+    //console.log(res.job);
     return res.job;
   }
 
@@ -71,6 +71,29 @@ class JoblyApi {
       console.error("Error getting jobs:", error);
     }
   }
+
+  static async signup(userData) {
+    try {
+      let res = await this.request("auth/register", userData, "post");
+      return res.token;
+    } catch (error) {
+      console.error("error during signup", error);
+      throw error;
+    }
+  }
+
+  static async login(userData) {
+    try {
+      let res = await this.request("auth/token", userData, "post")
+      console.log(res.token, 'here');
+      return res.token;
+    } catch (error) {
+      console.error("error during login", error);
+      throw error;
+    }
+  }
+ 
+
 }
 
 export default JoblyApi;

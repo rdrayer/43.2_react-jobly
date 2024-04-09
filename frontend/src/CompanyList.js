@@ -49,7 +49,7 @@ function CompanyList() {
                     </div>
                 ) : (
                     <p>Sorry, no results</p>
-                )}
+            )}
         </div>
     );
 }

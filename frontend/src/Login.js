@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login({ login }) {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -16,7 +19,12 @@ function Login({ login }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await login(formData);
+        try {
+            await login(formData);
+            navigate('/'); // redirect to home page
+        } catch (error) {
+            // todo
+        }
     };
 
     return (

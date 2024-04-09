@@ -1,5 +1,6 @@
 import React , { useState, useEffect, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import useLocalStorage from './useLocalStorage'
 import './App.css';
 import JoblyApi from "./api";
 import Home from "./Home";
@@ -15,7 +16,7 @@ import SignUp from "./SignUp";
 export const UserContext = createContext();
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useLocalStorage('joblyToken');
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -23,13 +24,15 @@ function App() {
       const user = jwtDecode(token);
       JoblyApi.token = token;
       setCurrentUser(user);
+      console.log("user is logged in");
     } else {
       setCurrentUser(null);
+      console.log("user is NOT logged in")
     }
   }, [token]);
 
   async function login(loginData) {
-    const token = await JoblyApi.loging(loginData);
+    const token = await JoblyApi.login(loginData);
     setToken(token);
   }
 
@@ -40,7 +43,7 @@ function App() {
 
   function logout() {
     setToken(null);
-    setCurrentUser(null);
+    localStorage.removeItem('joblyToken');
   }
 
   return (

@@ -30,6 +30,9 @@ function CompanyDetail() {
             <h2>{company.name}</h2>
             <p>{company.description}</p>
             {company.logoURL && <img src={company.logoURL} alt={`${company.name} logo`} />}
+            {company.jobs.map(j => (
+                <div>{j.title}, {j.salary} <button>Apply</button></div>
+            ))}
         </div>
     )
 }
