@@ -12,6 +12,7 @@ import JobDetail from "./JobDetail";
 import { jwtDecode } from 'jwt-decode';
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Profile from "./Profile";
 
 export const UserContext = createContext();
 
@@ -20,15 +21,23 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    if (token) {
-      const user = jwtDecode(token);
-      JoblyApi.token = token;
-      setCurrentUser(user);
-      console.log("user is logged in");
-    } else {
-      setCurrentUser(null);
-      console.log("user is NOT logged in")
+    async function getCurrentUser() {
+      console.log(token, typeof(token), 'token');
+      if (token) {
+        try {
+          let { username } = jwtDecode(token);
+          JoblyApi.token = token;
+          let currentUser = await JoblyApi.getCurrentUser(username);
+          setCurrentUser(currentUser);
+          console.log("user is logged in");
+        }
+        catch (error) {
+        setCurrentUser(null);
+        console.error("user is NOT logged in", error)
+        }
+      }
     }
+    getCurrentUser();
   }, [token]);
 
   async function login(loginData) {
@@ -38,6 +47,11 @@ function App() {
 
   async function signup(signupData) {
     const token = await JoblyApi.signup(signupData);
+    setToken(token);
+  }
+
+  async function editProfile(editData) {
+    const token = await JoblyApi.editProfile(editData);
     setToken(token);
   }
 
@@ -60,9 +74,7 @@ function App() {
               <Route path="/jobs/:id" element={<JobDetail />}/>
               <Route path="/login" element={<Login login={login} />} />
               <Route path="/signup" element={<SignUp signup={signup} />} />
-              {/*
-              <Route path="/profile" element={<Profile />} />
-              */}
+              <Route path="/users/:username" element={<Profile />} />
               <Route element={<p>Hmm, I can't seem to find the page you're looking for.</p>} />
             </Routes>     
           </main>

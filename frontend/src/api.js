@@ -16,8 +16,6 @@ class JoblyApi {
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
-    //console.log(JoblyApi.token);
-    //console.log(process.env.REACT_APP_BASE_URL);
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
@@ -40,9 +38,13 @@ class JoblyApi {
 
   /** Get details on a company by handle. */
 
+  static async getCurrentUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
-    //console.log(res);
     return res.company;
   }
 
@@ -58,14 +60,12 @@ class JoblyApi {
 
   static async getJob(id) {
     let res = await this.request(`jobs/${id}`);
-    //console.log(res.job);
     return res.job;
   }
 
   static async getJobs(title) {
     try {
       let res = await this.request("jobs", { title });
-      //console.log(res.jobs);
       return res.jobs;
     } catch (error) {
       console.error("Error getting jobs:", error);
@@ -84,13 +84,28 @@ class JoblyApi {
 
   static async login(userData) {
     try {
-      let res = await this.request("auth/token", userData, "post")
-      console.log(res.token, 'here');
+      let res = await this.request("auth/token", userData, "post");
       return res.token;
     } catch (error) {
       console.error("error during login", error);
       throw error;
     }
+  }
+
+  static async editProfile( formData) {
+    const { username, ...updateData } = formData;
+    try {
+      let res = await this.request(`users/rdrays`, formData, "patch")
+      return res.user;
+    } catch (error) {
+      console.error("error editing profile", error);
+      throw error;
+    }
+  }
+
+  static async saveProfile(username, data) {
+    let res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
   }
  
 

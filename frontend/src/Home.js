@@ -20,7 +20,7 @@ function Home() {
             {welcomeMessage && <h2>{welcomeMessage}</h2>}
             {currentUser ? (
                 <p>
-                    Welcome {currentUser.username}
+                    Welcome Back {currentUser.username}
                 </p>
             ) : (
                 <>

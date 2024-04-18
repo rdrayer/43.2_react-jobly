@@ -91,7 +91,6 @@ function SignUp({ signup }) {
           required
         />
       </div>
-      {/* Add other input fields as necessary */}
       <button type="submit">Sign Up</button>
     </form>
   );

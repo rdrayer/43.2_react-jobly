@@ -91,6 +91,7 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
 
 router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
+    console.log(req.body, 'req.body');
     const validator = jsonschema.validate(req.body, userUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
@@ -98,6 +99,7 @@ router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, n
     }
 
     const user = await User.update(req.params.username, req.body);
+    console.log('parth', user);
     return res.json({ user });
   } catch (err) {
     return next(err);

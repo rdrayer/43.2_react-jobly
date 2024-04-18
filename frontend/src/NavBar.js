@@ -8,24 +8,33 @@ function NavBar() {
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
-  }
+  };
 
   return (
     <nav>
-      <Link to="/">Home</Link> | 
-      <Link to="/companies">Companies</Link> | 
-      <Link to="/jobs">Jobs</Link> | 
-      <Link to="/profile">Profile</Link> |
+      <Link to="/">Jobly</Link>
+      {currentUser && (
+        <>
+          {" | "}
+          <Link to="/companies">Companies</Link>
+          {" | "}
+          <Link to="/jobs">Jobs</Link>
+          {" | "}
+          <Link to={`/users/${currentUser.username}`}>Profile</Link>
+        </>
+      )}
       {currentUser ? (
         <>
+          {" | "}
           <a href="/logout" onClick={handleLogout}>
-            Logout {currentUser.username}
+            Logout {currentUser.firstName || currentUser.username}
           </a>
         </>
       ) : (
-        // if no user is logged in, show login/signup links
         <>
-          <Link to="/login">Login</Link> | 
+          {" | "}
+          <Link to="/login">Login</Link>
+          {" | "}
           <Link to="/signup">Signup</Link>
         </>
       )}
