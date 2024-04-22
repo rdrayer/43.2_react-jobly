@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "./App";
+import { Link } from 'react-router-dom';
+import './Home.css';
 
 function Home() {
     const [welcomeMessage, setWelcomeMessage] = useState('');
@@ -19,13 +21,12 @@ function Home() {
             <h3>All the jobs in one, convenient place.</h3>
             {welcomeMessage && <h2>{welcomeMessage}</h2>}
             {currentUser ? (
-                <p>
-                    Welcome Back {currentUser.username}
-                </p>
+                <p>Welcome Back {currentUser.firstName}</p>
             ) : (
-                <>
-
-                </>
+                <p>
+                    <Link className="btn" to="/login">Login</Link>
+                    <Link className="btn" to="/signup">Signup</Link>
+                </p>
             )}
         </div>
         

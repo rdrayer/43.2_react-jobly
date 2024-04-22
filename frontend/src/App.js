@@ -22,7 +22,6 @@ function App() {
 
   useEffect(() => {
     async function getCurrentUser() {
-      console.log(token, typeof(token), 'token');
       if (token) {
         try {
           let { username } = jwtDecode(token);
@@ -50,14 +49,9 @@ function App() {
     setToken(token);
   }
 
-  async function editProfile(editData) {
-    const token = await JoblyApi.editProfile(editData);
-    setToken(token);
-  }
-
   function logout() {
     setToken(null);
-    localStorage.removeItem('joblyToken');
+    setCurrentUser(null);
   }
 
   return (

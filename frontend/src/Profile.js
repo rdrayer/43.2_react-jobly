@@ -10,10 +10,12 @@ function Profile() {
         email: ''
     }
     const [formData, setFormData] = useState(userData);
+    const [isUpdated, setIsUpdated] = useState(false);
 
     useEffect(() => {
         if (currentUser) {
             setFormData({
+                username: currentUser.username,
                 firstName: currentUser.firstName || '',
                 lastName: currentUser.lastName || '',
                 email: currentUser.email || ''
@@ -31,8 +33,15 @@ function Profile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let profileData = {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email
+        }
+        let username = formData.username;
         try {
-            await JoblyApi.editProfile(formData);
+            await JoblyApi.editProfile(username, profileData);
+            setIsUpdated(true);
         } catch (error) {
           console.error('error handling submit', error);
         }
@@ -41,6 +50,11 @@ function Profile() {
     return (
         <form onSubmit={handleSubmit}>
             <div>
+                <label>Username</label>
+                <input
+                    disabled
+                    placeholder={formData.username}
+                />
                 <label>First Name</label>
                 <input
                     type="text"
@@ -66,6 +80,7 @@ function Profile() {
                     onChange={handleChange}
                 />
                 <button type="submit">Save Changes</button>
+                {isUpdated && <div>Updated Successfully</div>}
             </div>
         </form>
     )

@@ -1,0 +1,25 @@
+.navbar {
+    background-color: #4CAF50; /* Green background similar to the button */
+    padding: 10px 20px; /* Padding around the navbar content */
+    color: white; /* White text color */
+    text-align: center; /* Center alignment of navbar items */
+    font-size: 18px; /* Font size for the text inside the navbar */
+    position: fixed; /* Fixed at the top of the page */
+    width: 100%; /* Full width */
+    top: 0; /* Stick to the top of the page */
+    left: 0; /* Stick to the left of the page */
+    z-index: 1000; /* Make sure navbar is on top of other content */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); /* Subtle shadow for depth */
+  }
+  
+  .navbar a {
+    color: white; /* White text for links */
+    text-decoration: none; /* No underline for links */
+    padding: 10px 15px; /* Padding for each link */
+    margin: 0 10px; /* Spacing between links */
+  }
+  
+  .navbar a:hover {
+    background-color: #45a049; /* Darker green on hover for links */
+  }
+  

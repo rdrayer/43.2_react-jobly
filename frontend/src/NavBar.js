@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from './App';
+import './NavBar.css';
 
 function NavBar() {
   const { currentUser, logout } = useContext(UserContext);
 
   const handleLogout = (e) => {
-    e.preventDefault();
     logout();
   };
 
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">Jobly</Link>
       {currentUser && (
         <>
@@ -26,9 +26,9 @@ function NavBar() {
       {currentUser ? (
         <>
           {" | "}
-          <a href="/logout" onClick={handleLogout}>
+          <Link to="/" onClick={handleLogout}>
             Logout {currentUser.firstName || currentUser.username}
-          </a>
+          </Link>
         </>
       ) : (
         <>

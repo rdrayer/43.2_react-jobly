@@ -40,6 +40,7 @@ class JoblyApi {
 
   static async getCurrentUser(username) {
     let res = await this.request(`users/${username}`);
+    console.log(res.user);
     return res.user;
   }
 
@@ -92,22 +93,16 @@ class JoblyApi {
     }
   }
 
-  static async editProfile( formData) {
-    const { username, ...updateData } = formData;
-    try {
-      let res = await this.request(`users/rdrays`, formData, "patch")
-      return res.user;
-    } catch (error) {
-      console.error("error editing profile", error);
-      throw error;
-    }
-  }
-
-  static async saveProfile(username, data) {
+  static async editProfile(username, data) {
     let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
   }
- 
+
+  static async applyToJob(username, jobId) {
+    let data = { username, jobId };
+    let res = await this.request(`users/${username}/jobs/${jobId}`, data, "post");
+    return res.jobId;
+  }
 
 }
 
